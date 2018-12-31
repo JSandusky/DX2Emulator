@@ -151,7 +151,8 @@ namespace DX2Data
                             skill.Element = ParseElement(skillData["Element"].Value<string>());
 
                             string costText = skillData["Cost"].Value<string>();
-                            if (costText == "Passive")
+                            
+                            if (costText.ToLowerInvariant().Trim() == "passive")
                                 skill.MPCost = 0;
                             else
                                 skill.MPCost = int.Parse(costText.Replace(" MP", ""));
