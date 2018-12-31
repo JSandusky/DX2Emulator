@@ -1,0 +1,139 @@
+﻿<UserControl x:Class="DX2Emulator.Controls.DemonCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DX2Emulator.Controls"
+             xmlns:convert="clr-namespace:DX2Emulator.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Margin="10">
+    <UserControl.Resources>
+        <convert:DemonImageConverter x:Key="demonImg" />
+        <convert:ResistanceConverter x:Key="resConv" />
+        <convert:ArchImageConverter x:Key="archImg" />
+        <convert:SkillToolTipConverter x:Key="skillTip" />
+    </UserControl.Resources>
+    <Grid VerticalAlignment="Top" HorizontalAlignment="Left">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64"/>
+            <!-- portrait -->
+            <RowDefinition Height="60"/>
+            <!-- race -->
+            <RowDefinition Height="100"/>
+            <!-- Stats -->
+            <RowDefinition Height="80"/>
+            <!-- atk/def -->
+            <RowDefinition Height="40"/>
+            <!-- Brands -->
+            <RowDefinition Height="40"/>
+            <!-- resists-->
+            <RowDefinition />
+            <!-- skills -->
+        </Grid.RowDefinitions>
+        <Image x:Name="portrait" Grid.Row="0" Source="{Binding Kind.Image, Converter={StaticResource demonImg}}" Width="32" Height="64" />
+        <Image x:Name="archImage" Grid.Row="0" Source="{Binding Kind.Archetype, Converter={StaticResource archImg}}" Width="16" Height="32" Margin="16, 0" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <ComboBox x:Name="demonCombo" Grid.Row="0" />
+            <ComboBox x:Name="archCombo" Grid.Row="1" />
+            <StackPanel Orientation="Vertical" Grid.Row="2">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Race: " FontWeight="Bold" />
+                    <Label x:Name="race" Content="{Binding Kind.Race}" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label Content="Str" Grid.Column="0" Grid.Row="0"/>
+            <Label Content="Mag" Grid.Column="0" Grid.Row="1"/>
+            <Label Content="Agi" Grid.Column="0" Grid.Row="2"/>
+            <Label Content="Vit" Grid.Column="0" Grid.Row="3"/>
+            <Label Content="Luck" Grid.Column="0" Grid.Row="4"/>
+            
+            <Label x:Name="str"  Content="{Binding Strength}" Grid.Column="1" Grid.Row="0"/>
+            <Label x:Name="mag"  Content="{Binding Magic}"    Grid.Column="1" Grid.Row="1"/>
+            <Label x:Name="agi"  Content="{Binding Agility}"  Grid.Column="1" Grid.Row="2"/>
+            <Label x:Name="vit"  Content="{Binding Vitality}" Grid.Column="1" Grid.Row="3"/>
+            <Label x:Name="luck" Content="{Binding Luck}"    Grid.Column="1" Grid.Row="4"/>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label Content="Phys Atk" Foreground="Gold" Grid.Column="0" Grid.Row="0"/>
+            <Label Content="Phys Def" Foreground="Gold" Grid.Column="1" Grid.Row="0"/>
+            <Label Content="Mag Atk" Foreground="Magenta" Grid.Column="0" Grid.Row="2"/>
+            <Label Content="Mag Def" Foreground="Magenta" Grid.Column="1" Grid.Row="2"/>
+
+            <local:NumericTextBox Text="{Binding PhysicalAttack}" Grid.Column="0" Grid.Row="1" />
+            <local:NumericTextBox Text="{Binding PhysicalDefense}" Grid.Column="1" Grid.Row="1" />
+            <local:NumericTextBox Text="{Binding MagicAttack}" Grid.Column="0" Grid.Row="3" />
+            <local:NumericTextBox Text="{Binding MagicDefense}" Grid.Column="1" Grid.Row="3" />
+        </Grid>
+        <StackPanel Orientation="Horizontal" Grid.Row="4">
+            <CheckBox Content="Divine" IsChecked="{Binding DivineBrands}" />
+            <CheckBox Content="Lead" IsChecked="{Binding LeadBrands}"/>
+        </StackPanel>
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Image Source="/DX2Emulator;component/Img/phys.png" Width="20" Height="20" Grid.Row="0" Grid.Column="0" />
+            <Image Source="/DX2Emulator;component/Img/fire.png" Width="20" Height="20" Grid.Row="0" Grid.Column="1" />
+            <Image Source="/DX2Emulator;component/Img/ice.png" Width="20" Height="20" Grid.Row="0" Grid.Column="2" />
+            <Image Source="/DX2Emulator;component/Img/elec.png" Width="20" Height="20" Grid.Row="0" Grid.Column="3" />
+            <Image Source="/DX2Emulator;component/Img/force.png" Width="20" Height="20" Grid.Row="0" Grid.Column="4" />
+            <Image Source="/DX2Emulator;component/Img/light.png" Width="20" Height="20" Grid.Row="0" Grid.Column="5" />
+            <Image Source="/DX2Emulator;component/Img/dark.png" Width="20" Height="20" Grid.Row="0" Grid.Column="6" />
+
+            <Label Content="{Binding Resistances.Phys, Converter={StaticResource resConv}}" Grid.Row="1" Grid.Column="0" />
+            <Label Content="{Binding Resistances.Fire, Converter={StaticResource resConv}}" Grid.Row="1" Grid.Column="1" />
+            <Label Content="{Binding Resistances.Ice, Converter={StaticResource resConv}}" Grid.Row="1" Grid.Column="2" />
+            <Label Content="{Binding Resistances.Elec, Converter={StaticResource resConv}}" Grid.Row="1" Grid.Column="3" />
+            <Label Content="{Binding Resistances.Force, Converter={StaticResource resConv}}" Grid.Row="1" Grid.Column="4" />
+            <Label Content="{Binding Resistances.Light, Converter={StaticResource resConv}}" Grid.Row="1" Grid.Column="5" />
+            <Label Content="{Binding Resistances.Dark, Converter={StaticResource resConv}}" Grid.Row="1" Grid.Column="6" />
+        </Grid>
+        <StackPanel Orientation="Vertical" Grid.Row="6">
+            <Label Content="{Binding Kind.Skill1.Name}" ToolTip="{Binding Kind.Skill1.DisplayString}" />
+            <Label Content="{Binding Kind.Skill2.Name}" ToolTip="{Binding Kind.Skill2.DisplayString}" />
+            <Label Content="{Binding Kind.Skill3.Name}" ToolTip="{Binding Kind.Skill3.DisplayString}" />
+            <Label Content="{Binding Kind.AwakenSkill.Name}" ToolTip="{Binding Kind.AwakenSkill.DisplayString}" />
+            <ComboBox x:Name="transfer1" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=SelectedValue, Converter={StaticResource skillTip}}" />
+            <ComboBox x:Name="transfer2" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=SelectedValue, Converter={StaticResource skillTip}}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
