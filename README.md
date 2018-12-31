@@ -1,2 +1,7 @@
-# DX2Emulator
-Parses json skill files for emulating DX2 gameplay to get a rough idea of what Turn 1 will look like.
+# DxEmulator
+
+Mock turn 1 emulator for DX2.
+
+**Heavy work in progress**, currently only works as a team-builder tool.
+
+![screenshot](teamshot.png)
